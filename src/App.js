@@ -1,25 +1,28 @@
-import logo from './logo.svg';
 import './App.css';
+import React from "react";
+import Master from './components/master';
+import SideBar from './components/sidebar';
+import NavBar from './components/navbar';
+import Draggable from 'react-draggable';
+import {useRef} from "react";
+import Xarrow from "react-xarrows";
+import database from './content/data.json';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+    let topicsList = [];
+    database.topics.forEach((topic, index) => {
+        topicsList.push(<Master title={topic.title} entries={topic.entries} />)
+    });
+
+    return (
+    <div id="App"> 
+        <div className="main-graph">
+            {topicsList}
+        </div>
     </div>
-  );
+    );
 }
 
 export default App;
